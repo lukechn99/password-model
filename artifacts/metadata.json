@@ -1,0 +1,92 @@
+{
+  "feature_columns": {
+    "col_0": {
+      "column_index": 0, 
+      "hash_buckets": 187, 
+      "mode": "(]y63M8`8g8eZ", 
+      "num_category": 33566, 
+      "treatment": "hashing", 
+      "type": "categorical"
+    }, 
+    "col_1": {
+      "column_index": 1, 
+      "mapping": {
+        "0": 0, 
+        "1": 1, 
+        "10": 10, 
+        "11": 11, 
+        "12": 12, 
+        "13": 13, 
+        "15": 14, 
+        "2": 2, 
+        "3": 3, 
+        "4": 4, 
+        "5": 5, 
+        "6": 6, 
+        "7": 7, 
+        "8": 8, 
+        "9": 9
+      }, 
+      "mode": "1", 
+      "num_category": 15, 
+      "treatment": "identity", 
+      "type": "categorical"
+    }, 
+    "col_2": {
+      "column_index": 2, 
+      "mapping": {
+        "0": 0, 
+        "1": 1, 
+        "10": 10, 
+        "11": 11, 
+        "12": 12, 
+        "13": 13, 
+        "14": 14, 
+        "15": 15, 
+        "2": 2, 
+        "3": 3, 
+        "4": 4, 
+        "5": 5, 
+        "6": 6, 
+        "7": 7, 
+        "8": 8, 
+        "9": 9
+      }, 
+      "mode": "1", 
+      "num_category": 16, 
+      "treatment": "identity", 
+      "type": "categorical"
+    }, 
+    "col_3": {
+      "column_index": 3, 
+      "mapping": {
+        "10": 8, 
+        "11": 9, 
+        "12": 10, 
+        "13": 11, 
+        "14": 12, 
+        "2": 0, 
+        "3": 1, 
+        "4": 2, 
+        "5": 3, 
+        "6": 4, 
+        "7": 5, 
+        "8": 6, 
+        "9": 7
+      }, 
+      "mode": "3", 
+      "num_category": 13, 
+      "treatment": "identity", 
+      "type": "categorical"
+    }
+  }, 
+  "target_algorithm": "TensorFlow", 
+  "target_column": {
+    "mapping": {
+      "0": "not password", 
+      "1": "password"
+    }, 
+    "num_category": 2, 
+    "type": "classification"
+  }
+}

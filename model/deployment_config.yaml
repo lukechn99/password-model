@@ -1,0 +1,8 @@
+deploymentUri: gs://passwords_training_output/model/
+framework: TENSORFLOW
+labels:
+  global_step: '100000'
+  job_id: training_lr0002_1124
+  accuracy: '79'
+runtimeVersion: '1.14'
+pythonVersion: '2.7'
