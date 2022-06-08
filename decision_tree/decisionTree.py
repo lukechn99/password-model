@@ -35,6 +35,9 @@ class Decision_tree:
         # construct the decision-tree with recursion
         self.root = self.generate_tree(train_x,train_y)
 
+    def save(self):
+        pass
+
     def predict(self,test_x):
         # iterate through all samples
         prediction = np.zeros([len(test_x),]).astype('int') # placeholder
