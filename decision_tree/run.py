@@ -44,8 +44,34 @@ accuracy = np.count_nonzero(predictions.reshape(-1)==test_y.reshape(-1))/len(tes
 
 print('Test accuracy with minimum node entropy %f is %.3f' %(best_entropy,accuracy))
 
+### test passwords with a semi-random forest of 5 trees
+tree1 = Decision_tree(min_entropy=best_entropy)
+tree2 = Decision_tree(min_entropy=best_entropy)
+# tree3 = Decision_tree(min_entropy=best_entropy)
+tree4 = Decision_tree(min_entropy=best_entropy)
+tree5 = Decision_tree(min_entropy=best_entropy)
 
-### test passwords
+all_data = np.genfromtxt("test_data.csv",delimiter=",")
+data_length = all_data.shape[0]
+
+# split data from labels
+tree1_x = all_data[0:int(data_length * 0.2), :-1]
+tree1_y = all_data[0:int(data_length * 0.2), -1]
+tree2_x = all_data[int(data_length * 0.2):int(data_length * 0.4), :-1]
+tree2_y = all_data[int(data_length * 0.2):int(data_length * 0.4), -1]
+tree3_x = all_data[int(data_length * 0.4):int(data_length * 0.6), :-1]
+tree3_y = all_data[int(data_length * 0.4):int(data_length * 0.6), -1]
+tree4_x = all_data[int(data_length * 0.6):int(data_length * 0.8), :-1]
+tree4_y = all_data[int(data_length * 0.6):int(data_length * 0.8), -1]
+tree5_x = all_data[int(data_length * 0.8):data_length, :-1]
+tree5_y = all_data[int(data_length * 0.8):data_length, -1]
+
+# fit data
+tree1.fit(tree1_x, tree1_y)
+tree2.fit(tree2_x, tree2_y)
+# tree3.fit(tree3_x, tree3_y)
+tree4.fit(tree4_x, tree4_y)
+tree5.fit(tree5_x, tree5_y)
 
 def generate_features(password):
     '''
@@ -54,9 +80,10 @@ def generate_features(password):
     3. has lower-case letter
     4. has number
     5. has symbol
+    6. only the first letter is capitalized
     '''
-    features = [0, 0, 0, 0, 0]
-    for char in password:
+    features = [0, 0, 0, 0, 0, 0, 0]
+    for i, char in enumerate(password):
         if char.isupper():
             features[1] = 1
         if char.islower():
@@ -65,9 +92,18 @@ def generate_features(password):
             features[3] = 1
         if (ord(char) >= 33 and ord(char) <= 47) or (ord(char) >= 58 and ord(char) <= 64) or (ord(char) >= 91 and ord(char) <= 96) or (ord(char) >= 123 and ord(char) <= 126):
             features[4] = 1
+        if i > 0 and char.isupper():
+            features[6] = 1
+
+    if password[-1] == '!':
+        features[5] = 1
     if len(password) >= 8:
         features[0] = 1
     return features
+
+# trees = [tree1, tree2, tree3, tree4, tree5]
+
+trees = [tree1, tree2, tree4, tree5]
 
 inp = ''
 
@@ -78,11 +114,12 @@ while inp != '.':
 
     # pre-process and filter
     if len(inp) < 8:
-        prediction = [0]
+        prediction = 0
     else:
-        prediction = clf.predict(np.array([features]))
-    
-    if prediction[0] == 0:
+        predictions = [t.predict(np.array([features]))[0] for t in trees]
+        print(predictions)
+        prediction = sum(predictions) / len(predictions)
+    if prediction == 0:
         print("This is most likely not a password")
     else:
         print("This is most likely a password")

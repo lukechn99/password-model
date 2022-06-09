@@ -36,7 +36,19 @@ class Decision_tree:
         self.root = self.generate_tree(train_x,train_y)
 
     def save(self):
-        pass
+        flat_tree = []
+        queue = [self.root]
+        while queue:
+            pop = queue[0]
+            queue = queue[1:]
+            if pop:
+                flat_tree.append((pop.feature, pop.label))
+                queue.append(pop.left_child)
+                queue.append(pop.right_child)
+            else:
+                flat_tree.append((-1, -1))
+            
+        print(flat_tree)
 
     def predict(self,test_x):
         # iterate through all samples
