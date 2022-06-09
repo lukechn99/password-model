@@ -7,7 +7,8 @@ def generate_features(password):
     3. has lower-case letter
     4. has number
     5. has symbol
-    6. only the first letter is capitalized
+    6. ends with an !
+    7. only the first letter is capitalized
     '''
     features = [0, 0, 0, 0, 0, 0, 0]
     for i, char in enumerate(password):
