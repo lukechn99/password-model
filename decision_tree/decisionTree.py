@@ -1,16 +1,3 @@
-"""
-In this programming assignment, we are going to implement the decision tree with recursion. The recommended implementation order of the functions are:
-1. compute_node_entropy: compute node entropy based with the given labels (sum -p*log2(p+1e-15), where p is the probability of each label)
-2. compute_split_entropy: given the left and right labels of the split, first compute the entropy of left and right labels with (1), and then weighted combine them to get the split entropy
-3. select_features: given the data and label, iterate through all possible features for split, and use (2) to compute the entropy. Select the feature index with best(lowest) entropy
-4. generate_tree: given all the data/label and min_entropy, generate the tree with recursion: the structure could be like follow: (Stop Criteria; Find the feature of current split (3); recursively             call itself again with left/right data/labels). With this structure, the function will recursively find the feature and also the feature for their left/right children, until the stop criteria is reached
-5. Decision_tree.predict: given each test data, you can traverse the tree to find its corresponding labels and return the labels
---------------------
-Here are some clarifications:
-For all test, we only test the functionality of each function, please report your answers in the pdf files.
-To ensure a deterministic result, don't shuffle data.
-"""
-
 import numpy as np
 
 class Tree_node:
